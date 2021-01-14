@@ -72,9 +72,11 @@ This README is missing documentation of your endpoints. Below is an example for 
 
 Endpoints
 GET '/categories'
-GET ...
-POST ...
-DELETE ...
+GET '/questions'
+GET '/categories/<int:id>/questions'
+DELETE '/questions/<int:id>'
+POST '/questions'
+POST '/quizzes'
 
 GET '/categories'
 - Fetches a dictionary of categories in which the keys are the ids and the value is the corresponding string of the category
@@ -86,6 +88,37 @@ GET '/categories'
 '4' : "History",
 '5' : "Entertainment",
 '6' : "Sports"}
+
+GET '/questions'
+- Feches a list of questions and paginate it each 10 questions
+- Request Arguments: None
+- Returns: list of questions, number of total questions, current category, categories. 
+
+DELETE '/questions/<int:id>'
+- Request Arguments: question id
+- Returns: list of questions without the deleted question
+
+POST '/questions'
+this endpoint do two functionalites:
+first: search for questions
+- Feches search term using 'searchTerm'
+- Request Arguments: 'searchTerm'
+- Returns: a list of questions for whom the search term is a substring of the question
+
+second: create new question
+- Feches new questions data (question,answer,category,difficulty)
+- Request Arguments: new question data (question,answer,category,difficulty)
+- Returns: a list of questions with the new question
+
+GET '/categories/<int:id>/questions'
+- Feches questions based on category id
+- Request Arguments: category id
+- Returns: a list of questions that have the selected category id
+
+POST '/quizzes'
+- Feches question randomly each time that has the selected category id until it reaches 5 questions if exist
+- Request Arguments: category id dictionary {'id', integer value}, previous questions array that contains the questions that user already got
+- Returns: one question each time the question is randomly picked based on category id, and it is not repeating the previous questions until it reaches 5 questions or less if the total questions in the selected category is less than 5.
 
 ```
 
